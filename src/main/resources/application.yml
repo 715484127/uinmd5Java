@@ -1,0 +1,12 @@
+spring:
+  thymeleaf:
+    prefix: classpath:/templates/
+    mode: HTML5
+  datasource:
+    url: jdbc:mysql://localhost:3306/uin?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&failOverReadOnly=false
+    username: root
+    password: 2006wang
+    druid:
+      initialSize: 2
+      minIdle: 2
+      maxActive: 30
