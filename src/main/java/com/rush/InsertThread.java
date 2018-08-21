@@ -12,19 +12,21 @@ public class InsertThread implements Runnable {
     public int uinstart;
     public int uinend;
     public String threadName;
+    public String tableName;
 
-    public InsertThread(int uinstart, int uinend, String threadName) {
+    public InsertThread(int uinstart, int uinend, String threadName, String tableName) {
         this.uinstart = uinstart;
         this.uinend = uinend;
         this.threadName = threadName;
+        this.tableName = tableName;
     }
 
     @Override
     public void run() {
-        System.out.println("|#线程:" + threadName + "|#开始|#计算范围:" + uinstart + "~" + uinend);
+        System.out.println("|#线程:" + threadName + "|#开始|#计算范围:" + uinstart + "~" + uinend + "|#插入表:" + tableName);
         Connection conn = InsertThread.getConn();
 
-        String sql = "insert into `00` values(?,?)";
+        String sql = "insert into `" + tableName + "` values(?,?)";
         PreparedStatement pstmt;
         try {
             conn.setAutoCommit(false);
@@ -62,7 +64,7 @@ public class InsertThread implements Runnable {
             //关闭总计时
             long eTime1 = System.currentTimeMillis();
             //输出
-            System.out.println("|#线程:" + threadName + "插入200W数据共耗时："+(eTime1-bTime1));
+            System.out.println("|#线程:" + threadName + "插入5000W数据共耗时："+(eTime1-bTime1));
         } catch (SQLException e) {
             e.printStackTrace();
         }

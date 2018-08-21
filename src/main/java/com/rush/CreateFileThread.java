@@ -10,6 +10,10 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by WYP on 2018/8/16.
@@ -75,11 +79,65 @@ public class CreateFileThread implements Runnable {
 
 
     public static void main(String[] args){
-        String uinMd5Str = "1F722FF4851F14DBF4546EB428349D61";
-        String md5Prefix = uinMd5Str.substring(0,2);
-        System.out.println(md5Prefix);
-        int i = -2000000000;
-        System.out.println(String.valueOf(i));
+//        String uinMd5Str = "1F722FF4851F14DBF4546EB428349D61";
+//        String md5Prefix = uinMd5Str.substring(0,2);
+//        System.out.println(md5Prefix);
+//        int i = -2000000000;
+//        System.out.println(String.valueOf(i));
+
+        Map<Integer,List<Integer>> uinMap = new HashMap<Integer,List<Integer>>();
+        int count = 0; //计数
+        int minUin = 100000000;
+        int maxUin = 2000000000;
+
+        while(true){
+            int uinStart = 0;
+            int uinEnd = 0;
+            List<Integer> uinList = new ArrayList<Integer>();
+            if(minUin == maxUin){
+                uinStart = minUin;
+                uinEnd = maxUin;
+            }else{
+                uinStart = minUin;
+                uinEnd = uinStart + 49999999;
+            }
+            uinList.add(uinStart);
+            uinList.add(uinEnd);
+            uinMap.put(count,uinList);
+            count++;
+            minUin = uinEnd + 1;
+            if(minUin > maxUin){
+                break;
+            }
+        }
+        System.out.println("=============");
+
+        int minUin_minus = -2000000000;
+        int maxUin_minus = -100000000;
+        while(true){
+            int uinStart = 0;
+            int uinEnd = 0;
+            List<Integer> uinList = new ArrayList<Integer>();
+            if(minUin_minus == maxUin_minus){
+                uinStart = minUin_minus;
+                uinEnd = maxUin_minus;
+            }else{
+                uinStart = minUin_minus;
+                uinEnd = uinStart + 49999999;
+            }
+            uinList.add(uinStart);
+            uinList.add(uinEnd);
+            uinMap.put(count,uinList);
+            count++;
+            minUin_minus = uinEnd + 1;
+            if(minUin_minus > maxUin_minus){
+                break;
+            }
+        }
+
+        System.out.println("=============");
+        uinMap.get(80);
+        System.out.println("=============");
     }
 
 
